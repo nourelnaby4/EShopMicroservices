@@ -1,4 +1,4 @@
-﻿namespace Catalog.API.Features.Products;
+﻿namespace Catalog.API.Features.Products.CreateProduct;
 
 public record CreateProductCommand(string Name, List<string> Category, string Description, string ImageFile, decimal Price)
     : ICommand<CreateProductResult>;
