@@ -1,4 +1,5 @@
 using BuildingBlocks.Behaviors;
+using BuildingBlocks.Exceptions.Handler;
 using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,9 +20,12 @@ builder.Services.AddMarten(options =>
 
 builder.Services.AddCarter();
 
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 var app = builder.Build();
 
 app.MapCarter();
+
+app.UseExceptionHandler(options => { });
 
 app.Run();

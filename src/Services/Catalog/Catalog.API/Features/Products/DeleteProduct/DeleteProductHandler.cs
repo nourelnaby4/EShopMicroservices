@@ -17,7 +17,7 @@ internal sealed class DeleteProductHandler
 
         if (product is null)
         {
-            throw new ProductNotFoundException();
+            throw new ProductNotFoundException(command.Id);
         }
 
         session.Delete(product);
