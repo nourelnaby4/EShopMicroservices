@@ -8,7 +8,8 @@ var assemply = typeof(Program).Assembly;
 builder.Services.AddMediatR(configuration =>
 {
     configuration.RegisterServicesFromAssemblies(assemply);
-    configuration.AddOpenBehavior(typeof(ValidationBehaviors<,>));
+    configuration.AddOpenBehavior(typeof(ValidationBehavior<,>));
+    configuration.AddOpenBehavior(typeof(LogingBehavior<,>));
 });
 
 builder.Services.AddValidatorsFromAssembly(assemply);

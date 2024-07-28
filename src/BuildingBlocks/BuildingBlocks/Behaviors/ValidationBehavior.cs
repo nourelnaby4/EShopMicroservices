@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 namespace BuildingBlocks.Behaviors;
 
-public class ValidationBehaviors<TRequset, TResponse>
+public class ValidationBehavior<TRequset, TResponse>
     (IEnumerable<IValidator> validators)
     : IPipelineBehavior<TRequset, TResponse>
     where TResponse : ICommand<TRequset>
