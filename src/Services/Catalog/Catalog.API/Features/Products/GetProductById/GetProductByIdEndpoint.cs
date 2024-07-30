@@ -1,6 +1,4 @@
-﻿using Catalog.API.Features.Products.GetProducts;
-
-namespace Catalog.API.Features.Products.GetProductById;
+﻿namespace Catalog.API.Features.Products.GetProductById;
 
 public record GetProductByIdResponse(Product Product);
 

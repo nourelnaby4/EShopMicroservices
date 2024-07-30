@@ -1,6 +1,4 @@
-﻿using Catalog.API.Features.Products.GetProducts;
-
-namespace Catalog.API.Features.Products.GetProductByCategory;
+﻿namespace Catalog.API.Features.Products.GetProductByCategory;
 
 public record GetProductByCategoryResponse(IEnumerable<Product> Products);
 
