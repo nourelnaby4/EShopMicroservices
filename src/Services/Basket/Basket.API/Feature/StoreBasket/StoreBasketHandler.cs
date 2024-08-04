@@ -2,7 +2,7 @@
 
 public record StoreBasketCommand(ShoppingCart Cart) : ICommand<StoreBasketResult>;
 
-public record StoreBasketResult(bool IsSuccess);
+public record StoreBasketResult(string UserName);
 
 public class StoreBasketCommandValidatot : AbstractValidator<StoreBasketCommand>
 {
@@ -24,6 +24,6 @@ public class StoreBasketCommandHandler
         //TODO: store in database
         //TODO: update cache
 
-        return new StoreBasketResult(IsSuccess: true);
+        return new StoreBasketResult("sms");
     }
 }
