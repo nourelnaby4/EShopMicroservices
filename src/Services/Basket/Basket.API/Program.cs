@@ -17,6 +17,12 @@ builder.Services.AddCarter();
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
+builder.Services.AddMarten(options =>
+{
+    options.Connection(builder.Configuration.GetConnectionString("Database")!);
+    options.Schema.For<ShoppingCart>().Identity(x => x.UserName); //set username as primarykey
+}).UseLightweightSessions();
+
 var app = builder.Build();
 
 app.MapCarter();
