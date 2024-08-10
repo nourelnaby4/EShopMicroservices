@@ -1,7 +1,7 @@
-using Discount.Grpc;
+using Disccount.Grpc;
 using Grpc.Core;
 
-namespace Discount.Grpc.Services
+namespace Disccount.Grpc.Services
 {
     public class GreeterService : Greeter.GreeterBase
     {
