@@ -1,4 +1,4 @@
-using Disccount.Grpc.Services;
+using Discount.Grpc.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
