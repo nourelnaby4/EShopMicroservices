@@ -8,11 +8,7 @@ service DiscountProtoService{
 	rpc GetDiscount (GetDiscountRequest) returns (CouponModel);
 	rpc CreateDiscount (CreateDiscountRequest) returns (CouponModel);
 	rpc UpdateDiscount (UpdateDiscountRequest) returns (CouponModel);
-	rpc DeleteDiscount (GetDiscountRequest) returns (DeleteDiscountResponse);
-}
-
-message GetDiscountRequest{
-	string productName = 1;
+	rpc DeleteDiscount (DeleteDiscountRequest) returns (DeleteDiscountResponse);
 }
 
 message CouponModel{
@@ -22,18 +18,22 @@ message CouponModel{
 	string amount = 4;
 }
 
-message CreateDiscount{
-	CouponModel coupon = 1;
-}
-
-message UpdateDiscount{
-	CouponModel coupon = 1;
-}
-
-message CreateDiscount{
-	CouponModel coupon = 1;
-}
-
-message CreateDiscount{
+message GetDiscountRequest{
 	string productName = 1;
+}
+
+message CreateDiscountRequest{
+	CouponModel coupon = 1;
+}
+
+message UpdateDiscountRequest{
+	CouponModel coupon = 1;
+}
+
+message DeleteDiscountRequest {
+	string productName = 1;
+}
+
+message DeleteDiscountResponse {
+	bool success = 1;
 }
