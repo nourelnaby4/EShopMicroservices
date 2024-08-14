@@ -1,4 +1,5 @@
 ﻿using Discount.Grpc.Data;
+using Discount.Grpc.Models;
 using Discount.Grpc.Protos;
 using Grpc.Core;
 using Mapster;
@@ -27,9 +28,21 @@ public class DiscountService
         return couponModel;
     }
 
-    public override Task<CouponModel> CreateDiscount(CreateDiscountRequest request, ServerCallContext context)
+    public override async Task<CouponModel> CreateDiscount(CreateDiscountRequest request, ServerCallContext context)
     {
-        return base.CreateDiscount(request, context);
+        var coupon = request.Coupon.Adapt<Coupon>();
+
+        if(coupon is null)
+            throw new RpcException(new Status(StatusCode.InvalidArgument,"Invalid request object"));
+
+        dbcontext.Coupons.Add(coupon);
+        await dbcontext.SaveChangesAsync();
+
+        logger.LogInformation("Created Coupone Successfully  ProductName: {productName}, Amount : {amount}",
+            coupon.ProductName, coupon.Amount);
+
+        var couponModel = coupon.Adapt<CouponModel>();
+        return couponModel;
     }
 
     public override Task<CouponModel> UpdateDiscount(UpdateDiscountRequest request, ServerCallContext context)
