@@ -38,20 +38,45 @@ public class DiscountService
         dbcontext.Coupons.Add(coupon);
         await dbcontext.SaveChangesAsync();
 
-        logger.LogInformation("Created Coupone Successfully  ProductName: {productName}, Amount : {amount}",
+        logger.LogInformation("Created Coupon Successfully  ProductName: {productName}, Amount : {amount}",
             coupon.ProductName, coupon.Amount);
 
         var couponModel = coupon.Adapt<CouponModel>();
         return couponModel;
     }
 
-    public override Task<CouponModel> UpdateDiscount(UpdateDiscountRequest request, ServerCallContext context)
+    public override async Task<CouponModel> UpdateDiscount(UpdateDiscountRequest request, ServerCallContext context)
     {
-        return base.UpdateDiscount(request, context);
+        var coupon = request.Coupon.Adapt<Coupon>();
+
+        if (coupon is null)
+            throw new RpcException(new Status(StatusCode.InvalidArgument, "Invalid request object"));
+
+        dbcontext.Coupons.Update(coupon);
+        await dbcontext.SaveChangesAsync();
+
+        logger.LogInformation("Updated Coupon Successfully  ProductName: {productName}, Amount : {amount}",
+            coupon.ProductName, coupon.Amount);
+
+        var couponModel = coupon.Adapt<CouponModel>();
+        return couponModel;
     }
 
-    public override Task<DeleteDiscountResponse> DeleteDiscount(DeleteDiscountRequest request, ServerCallContext context)
+    public override async Task<DeleteDiscountResponse> DeleteDiscount(DeleteDiscountRequest request, ServerCallContext context)
     {
-        return base.DeleteDiscount(request, context);
+        var coupon = await dbcontext
+            .Coupons
+            .FirstOrDefaultAsync(x => x.ProductName == request.ProductName);
+
+        if (coupon is null)
+            throw new RpcException(new Status(StatusCode.NotFound, $"Discount with ProductName:{request.ProductName} is not found"));
+
+        dbcontext.Coupons.Remove(coupon);
+        await dbcontext.SaveChangesAsync();
+
+        logger.LogInformation("Delete Coupon Successfully  ProductName: {productName}, Amount : {amount}",
+            coupon.ProductName, coupon.Amount);
+
+        return new DeleteDiscountResponse { Success = true };
     }
 }
