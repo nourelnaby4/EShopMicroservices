@@ -1,11 +1,14 @@
 using BuildingBlocks.Behaviors;
 using BuildingBlocks.Exceptions.Handler;
+using Discount.Grpc.Protos;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var assemply = typeof(Program).Assembly;
+
+// Application service
 builder.Services.AddMediatR(configuration =>
 {
     configuration.RegisterServicesFromAssemblies(assemply);
@@ -19,6 +22,24 @@ builder.Services.AddCarter();
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
+
+//Grpc Services
+builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(options =>
+{
+    options.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
+})
+  .ConfigurePrimaryHttpMessageHandler(() =>
+  {
+      var handler = new HttpClientHandler
+      {
+          ServerCertificateCustomValidationCallback =
+          HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+      };
+
+      return handler;
+  });
+
+// Data services
 builder.Services.AddMarten(options =>
 {
     options.Connection(builder.Configuration.GetConnectionString("Database")!);
