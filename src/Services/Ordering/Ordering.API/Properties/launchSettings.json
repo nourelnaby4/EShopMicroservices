@@ -6,17 +6,17 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:6003"
+      "dotnetRunMessages": false,
+      "applicationUrl": "http://localhost:5003"
     },
     "https": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:6063;http://localhost:6003"
+      "applicationUrl": "https://localhost:5053;http://localhost:5003"
     },
     "IIS Express": {
       "commandName": "IISExpress",
