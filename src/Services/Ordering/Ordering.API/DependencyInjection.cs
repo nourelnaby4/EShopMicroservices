@@ -2,7 +2,7 @@
 
 public static class DependencyInjection
 {
-    public static IServiceProvider AddApiServices(this IServiceProvider services)
+    public static IServiceCollection AddApiServices(this IServiceCollection services)
     {
         return services;
     }
