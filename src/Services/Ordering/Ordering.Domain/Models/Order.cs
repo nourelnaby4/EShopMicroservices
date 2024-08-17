@@ -6,8 +6,8 @@ public class Order : Aggregate<Guid>
 
     public IReadOnlyList<OrderItem> OrderItems => _orderItems.AsReadOnly();
 
-    public Guid CustmerId { get; private set; } = default!;
-    public string OrderName { get; private set; } = default!;
+    public CustomerId CustmerId { get; private set; } = default!;
+    public OrderName OrderName { get; private set; } = default!;
     public Address ShippingAddress { get; private set; } = default!;
     public Address BillingAddress { get; private set; } = default!;
     public Payment Payment { get; private set; } = default!;
