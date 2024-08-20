@@ -13,7 +13,6 @@ services:
     volumes:
       - postgres_catalog:/var/lib/postgresql/data/
 
-
   basketdb:
     container_name: basketdb
     environment:
@@ -26,13 +25,20 @@ services:
     volumes:
       - postgres_basket:/var/lib/postgresql/data/
 
-
   distributedcache:
     container_name: distributedcache
     restart: always
     ports:
        - "6379:6379"
-      
+ 
+  orderdb:
+    container_name: orderdb
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=MSSQLadmin#123
+    restart: always
+    ports:
+       - "1434:1433"
 
   catalog.api:
     environment:
