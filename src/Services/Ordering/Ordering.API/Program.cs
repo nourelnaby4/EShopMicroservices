@@ -1,6 +1,7 @@
 using Ordering.Application;
 using Ordering.API;
 using Ordering.Infrastructure;
+using Ordering.Infrastructure.Data.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,11 @@ builder.Services
     .AddApiServices();
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    await app.InitializeDatabaseAsync();
+}
 
 app.UseApiServices();
 
