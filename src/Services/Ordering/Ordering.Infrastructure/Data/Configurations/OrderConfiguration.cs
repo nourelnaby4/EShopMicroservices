@@ -13,7 +13,7 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
 
         builder.HasOne<Customer>()
             .WithMany()
-            .HasForeignKey(x => x.CustmerId)
+            .HasForeignKey(x => x.CustomerId)
             .IsRequired();
 
         builder.HasMany(x => x.OrderItems)

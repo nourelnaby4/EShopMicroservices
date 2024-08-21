@@ -12,8 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Orders\EventHandlers\" />
-    <Folder Include="Orders\Queries\" />
+    <Folder Include="Orders\EventHandlers\Integration\" />
+    <Folder Include="Orders\Queries\GetOrderByCustomer\" />
+    <Folder Include="Orders\Queries\GetOrders\" />
   </ItemGroup>
 
   <ItemGroup>
