@@ -16,13 +16,13 @@ public class Order : Aggregate<OrderId>
         private set { }
     }
 
-    public static Order Create(OrderId orderId, CustomerId custmerId, OrderName orderName,
+    public static Order Create(OrderId id, CustomerId customerId, OrderName orderName,
         Address shippingAddress, Address billingAddress, Payment payment)
     {
         var order = new Order
         {
-            Id = orderId,
-            CustmerId = custmerId,
+            Id = id,
+            CustmerId = customerId,
             OrderName = orderName,
             ShippingAddress = shippingAddress,
             BillingAddress = billingAddress,
