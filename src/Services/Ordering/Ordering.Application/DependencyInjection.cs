@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using BuildingBlockes.Messaging.MassTransit;
 using Microsoft.Extensions.Configuration;
+using Microsoft.FeatureManagement;
 
 namespace Ordering.Application;
 
@@ -18,6 +19,8 @@ public static class DependencyInjection
             config.AddOpenBehavior(typeof(ValidationBehavior<,>));
             config.AddOpenBehavior(typeof(LoggingBehavior<,>));
         });
+
+        services.AddFeatureManagement();
 
         services.AddMessageBroker(configuration, assembly);
 
