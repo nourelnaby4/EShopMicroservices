@@ -3,6 +3,7 @@ using BuildingBlocks.Exceptions.Handler;
 using Discount.Grpc.Protos;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using BuildingBlockes.Messaging.MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -57,6 +58,9 @@ builder.Services.AddStackExchangeRedisCache(options =>
 builder.Services.AddHealthChecks()
     .AddNpgSql(builder.Configuration.GetConnectionString("Database")!)
     .AddRedis(builder.Configuration.GetConnectionString("Redis")!);
+
+//Async Communication Services
+builder.Services.AddMessageBroker(builder.Configuration);
 
 var app = builder.Build();
 
